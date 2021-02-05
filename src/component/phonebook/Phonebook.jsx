@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ContactList from "../contactList/contactList/ContactList";
-import Alert from "../alert/Alert";
+// import Alert from "../alert/Alert";
 import styles from "./phonebook.module.css";
 import { CSSTransition } from "react-transition-group";
 import ContactFormCont from "../contactForm/ContactFormCont";
@@ -17,7 +17,7 @@ export default class Phonebook extends Component {
     // filter: "",
     // name: "",
     // number: "",
-    isVisible: false,
+    // isVisible: false,
   };
 
   componentDidMount() {
@@ -48,13 +48,13 @@ export default class Phonebook extends Component {
   //   this.setState({ filter: e.target.value });
   // };
 
-  getVisibleContacts = () => {
-    const { contacts, filter } = this.state;
+  // getVisibleContacts = () => {
+  //   const { contacts, filter } = this.state;
 
-    return contacts.filter((contacts) =>
-      contacts.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
-    );
-  };
+  //   return contacts.filter((contacts) =>
+  //     contacts.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+  //   );
+  // };
   // onNameChange = (e) => {
   //   this.setState({ name: e.target.value });
   // };
@@ -137,8 +137,6 @@ export default class Phonebook extends Component {
         >
           <h1>Phonebook</h1>
         </CSSTransition>
-
-        <Alert isVisible={this.state.isVisible} />
 
         <ContactFormCont />
         <h2>Contacts</h2>

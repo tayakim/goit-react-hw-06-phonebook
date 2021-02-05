@@ -2,11 +2,14 @@ import React from "react";
 import styles from "./contactForm.module.css";
 import { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
+import Alert from "../alert/Alert";
+import { connect } from "react-redux";
 
-export default class ContactForm extends Component {
+class ContactForm extends Component {
   state = {
     name: "",
     number: "",
+    isVisible: false,
   };
 
   onNameChange = (e) => {
@@ -16,18 +19,30 @@ export default class ContactForm extends Component {
     this.setState({ number: e.target.value });
   };
   onHandleClick = () => {
-    const addContact = {
-      id: uuidv4(),
-      name: this.state.name,
-      number: this.state.number,
-    };
-    this.props.onAddContact(addContact);
+    const isUnique = !this.props.contacts.some((item) =>
+      item.name.includes(this.state.name)
+    );
+
+    console.log(isUnique);
+
+    if (isUnique) {
+      const addContact = {
+        id: uuidv4(),
+        name: this.state.name,
+        number: this.state.number,
+      };
+      this.props.onAddContact(addContact);
+    } else {
+      setTimeout(() => this.setState({ isVisible: false }), 3000);
+      this.setState({ isVisible: true });
+    }
   };
 
   render() {
     console.log(this.props);
     return (
       <>
+        <Alert isVisible={this.state.isVisible} />
         <p>Name</p>
         <input
           placeholder="Name"
@@ -53,3 +68,9 @@ export default class ContactForm extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  contacts: state.contacts,
+});
+
+export default connect(mapStateToProps)(ContactForm);
