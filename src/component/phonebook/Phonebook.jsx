@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ContactList from "../contactList/contactList/ContactList";
-// import Alert from "../alert/Alert";
 import styles from "./phonebook.module.css";
 import { CSSTransition } from "react-transition-group";
 import ContactFormCont from "../contactForm/ContactFormCont";
